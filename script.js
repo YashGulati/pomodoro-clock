@@ -1,3 +1,5 @@
+var breakLen = 0;
+var sessLen = 0;
 var debug = 0;
 var minutes;
 var seconds = 0;
@@ -20,11 +22,7 @@ function back(){
 }
 
 function start() {
-  $('#decreBreakLen').click(function(){
-    $('#breakLen>#val').html(
-      parseInt($('#breakLen>#val').html()) - 1
-    );
-  });
+  LengthEventsHandler();
   $('#clock').click(function(){
     if (!running){
       running = 1;
@@ -36,10 +34,38 @@ function start() {
 
 $(document).ready(function(){
   minutes = ($('#sessLen>#val').html());
-  $('#time').html($('#sessLen>#val').html());
+  $('#time').html(minutes);
   if(debug){
     $('#debug').css("display","block");
     $('#debug').html( minutes+":"+seconds );
   }
   start();
 });
+
+function LengthEventsHandler(){ // + and - event handler
+  $('#decreBreakLen').click(function(){
+    breakLen = $('#breakLen>#val').html();
+    if(breakLen>1)
+      $('#breakLen>#val').html( --breakLen );
+  });
+  $('#increBreakLen').click(function(){
+    breakLen = parseInt ( $('#breakLen>#val').html() );
+    if(breakLen>1)
+      $('#breakLen>#val').html( ++breakLen );
+  });
+
+  $('#decreSessLen').click(function(){
+    sessLen = $('#sessLen>#val').html();
+    if(sessLen>1)
+      $('#sessLen>#val').html( --sessLen );
+    minutes = ($('#sessLen>#val').html());
+    $('#time').html(minutes);
+  });
+  $('#increSessLen').click(function(){
+    sessLen = parseInt ( $('#sessLen>#val').html() );
+    if(sessLen>1)
+      $('#sessLen>#val').html( ++sessLen );
+    minutes = ($('#sessLen>#val').html());
+    $('#time').html(minutes);
+  });
+}
