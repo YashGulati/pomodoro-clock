@@ -1,6 +1,9 @@
 // compileCompressed: style.css
+$clockHW: 300px
+$clockMarginColor: #449944
 @import url('https://fonts.googleapis.com/css?family=Pacifico')
 @import url('https://fonts.googleapis.com/css?family=Open+Sans')
+
 *
   margin: 0px
 body
@@ -13,12 +16,14 @@ body
       family: 'Pacifico', cursive
       size: 5vw
   #clock
+    position: relative
     cursor: pointer
-    border: 3px solid #449944
-    height: 300px
-    width: 300px
+    border: 3px solid $clockMarginColor
+    height: $clockHW
+    width: $clockHW
     margin: 40px auto
     border-radius: 50%
+    overflow: hidden
     p
       text-align: center
       margin: 50px auto
@@ -34,3 +39,21 @@ body
       font:
         family: 'Open Sans', sans-serif
         size: 4em
+    #fill
+      z-index: -1
+      background-color: $clockMarginColor
+      height: $clockHW
+      width: 100%
+      position: absolute
+  #debug
+    // background-color: #887766
+    width: 20%
+    height: 400px
+    margin: 50px
+    position: absolute
+    top: 200px
+    color: white
+    font-size: 2em
+    text-align: center
+    font-weight: bold
+    display: hidden
