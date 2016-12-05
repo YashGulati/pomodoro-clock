@@ -1,5 +1,6 @@
 // compileCompressed: style.css
 @import url('https://fonts.googleapis.com/css?family=Pacifico')
+@import url('https://fonts.googleapis.com/css?family=Open+Sans')
 *
   margin: 0px
 body
@@ -12,17 +13,24 @@ body
       family: 'Pacifico', cursive
       size: 5vw
   #clock
+    cursor: pointer
     border: 3px solid #449944
     height: 300px
     width: 300px
-    margin: 50px auto
+    margin: 40px auto
     border-radius: 50%
-    &>*
+    p
       text-align: center
-      margin: 30px auto
-      border: 5px solid red
+      margin: 50px auto
+      width: 80%
+      color: white
+      font-family: 'Open Sans', sans-serif
+      font-size: 3em
+    #time
+      text-align: center
+      margin: 50px auto
       width: 80%
       color: white
       font:
-        family: arial
-        size: 2em
+        family: 'Open Sans', sans-serif
+        size: 4em
