@@ -23,11 +23,12 @@ function back(){
 }
 
 function start() {
-  MinutesgthEventsHandler();
+    MinutesgthEventsHandler();
   $('#clock').click(function(){
     if (!running){
       running = 1;
-      totalTime = minutes*60 + seconds;
+      if( ($('#sessMinutes').html()) == ($('#time').html()) )
+        totalTime = minutes*60 + seconds;
       clock = setInterval(back,1000);
     }
     else{ running = 0; clearInterval(clock); }
@@ -49,28 +50,36 @@ $(document).ready(function(){ // all variable initializations
 
 function MinutesgthEventsHandler(){ // + and - event handler
   $('#decreBreakMinutes').click(function(){
-    breakMinutes = $('#breakMinutes>#val').html();
-    if(breakMinutes>1)
-      $('#breakMinutes>#val').html( --breakMinutes );
+    if(!running){
+      breakMinutes = $('#breakMinutes>#val').html();
+      if(breakMinutes>1)
+        $('#breakMinutes>#val').html( --breakMinutes );
+    }
   });
   $('#increBreakMinutes').click(function(){
-    breakMinutes = parseInt ( $('#breakMinutes>#val').html() );
-    if(breakMinutes>1)
-      $('#breakMinutes>#val').html( ++breakMinutes );
+    if(!running){
+      breakMinutes = parseInt ( $('#breakMinutes>#val').html() );
+      if(breakMinutes>1)
+        $('#breakMinutes>#val').html( ++breakMinutes );
+    }
   });
 
   $('#decreSessMinutes').click(function(){
-    sessMinutes = $('#sessMinutes>#val').html();
-    if(sessMinutes>1)
-      $('#sessMinutes>#val').html( --sessMinutes );
-    minutes = ($('#sessMinutes>#val').html());
-    $('#time').html(minutes);
+    if(!running){
+      sessMinutes = $('#sessMinutes>#val').html();
+      if(sessMinutes>1)
+        $('#sessMinutes>#val').html( --sessMinutes );
+      minutes = ($('#sessMinutes>#val').html());
+      $('#time').html(minutes);
+    }
   });
   $('#increSessMinutes').click(function(){
-    sessMinutes = parseInt ( $('#sessMinutes>#val').html() );
-    if(sessMinutes>1)
-      $('#sessMinutes>#val').html( ++sessMinutes );
-    minutes = ($('#sessMinutes>#val').html());
-    $('#time').html(minutes);
+    if(!running){
+      sessMinutes = parseInt ( $('#sessMinutes>#val').html() );
+      if(sessMinutes>1)
+        $('#sessMinutes>#val').html( ++sessMinutes );
+      minutes = ($('#sessMinutes>#val').html());
+      $('#time').html(minutes);
+    }
   });
 }
