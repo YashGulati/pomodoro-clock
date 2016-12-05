@@ -1,8 +1,9 @@
-var debug = 1;
+var debug = 0;
 var minutes = 1;
 var seconds = 0;
 var clock;
 var running = 0;
+var breakTime = 0;
 var totalTime = minutes*60 + seconds;
 var totalTimeRemaining;
 var totalTimeRemainingPercent = 0;
@@ -18,7 +19,7 @@ function back(){
 function start() {
 
   if(debug){
-    $('#debug').css("background-color","#887766");
+    $('#debug').css("display","block");
     $('#debug').html( minutes+":"+seconds );
   }
   $('#clock').click(function(){
