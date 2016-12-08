@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
     <link rel="stylesheet" href="style.css">
     <script src=jquery-3.1.0.min.js></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Pomodoro Clock</h1>
     <div id="settings">
-      <div id="breakMinutes"><div id="heading">BREAK LENGTH</div><button id="decreBreakMinutes" class="decre">-</button><div id="val">5</div><button id="increBreakMinutes" class="incre">+</button></div>
-      <div id="sessMinutes"><div id="heading">SESSION LENGTH</div><button id="decreSessMinutes" class="decre">-</button><div id="val">25</div><button id="increSessMinutes" class="incre">+</button></div>
+        <div id="breakMinutes">
+            <div id="heading">BREAK LENGTH</div>
+            <button id="decreBreakMinutes" class="decre">-</button>
+            <div id="val">5</div>
+            <button id="increBreakMinutes" class="incre">+</button>
+        </div>
+        <div id="sessMinutes">
+            <div id="heading">SESSION LENGTH</div><button id="decreSessMinutes" class="decre">-</button>
+            <div id="val">25</div><button id="increSessMinutes" class="incre">+</button></div>
     </div>
 
     <div id="clock">
-      <p>Session</p>
-      <div id="time"></div>
-      <div id="fill"></div>
+        <p>Session</p>
+        <div id="time"></div>
+        <div id="fill"></div>
     </div>
     <div id="debug"></div>
     <script src=script.js></script>
-  </body>
+</body>
+
 </html>
