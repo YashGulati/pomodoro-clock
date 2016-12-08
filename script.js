@@ -70,15 +70,16 @@ function MinutesgthEventsHandler(){ // + and - event handler
       if(sessMinutes>1)
         $('#sessMinutes>#val').html( --sessMinutes );
       minutes = ($('#sessMinutes>#val').html());
+      seconds = 0;
       $('#time').html(minutes);
     }
   });
   $('#increSessMinutes').click(function(){
     if(!running){
       sessMinutes = parseInt ( $('#sessMinutes>#val').html() );
-      if(sessMinutes>1)
-        $('#sessMinutes>#val').html( ++sessMinutes );
+      $('#sessMinutes>#val').html( ++sessMinutes );
       minutes = ($('#sessMinutes>#val').html());
+      seconds = 0;
       $('#time').html(minutes);
     }
   });
