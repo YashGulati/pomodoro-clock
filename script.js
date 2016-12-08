@@ -27,7 +27,7 @@ function start() {
   $('#clock').click(function(){
     if (!running){
       running = 1;
-      if( ($('#sessMinutes').html()) == ($('#time').html()) )
+      if( ($('#sessMinutes>#val').html()) == ($('#time').html()) )
         totalTime = minutes*60 + seconds;
       clock = setInterval(back,1000);
     }
