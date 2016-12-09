@@ -4,7 +4,6 @@ var breakMinutes = 2;
 //------------------------------------------------------------------------------------
 var seconds = 0;
 var breakSeconds = 0;
-var sessMinutes = 0;
 var debug = 0;
 var clock;
 var running = 0;
@@ -22,8 +21,8 @@ function breakBack(){
 }
 
 function back(){
-  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); breakRunning = 1; }
-  if(breakMinutes == 0 && breakSeconds == 0){ $('#clock>p').html("Session"); breakRunning = 0; }
+  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); minutes=$("#sessMinutes>#val").html(); breakRunning = 1; }
+  if(breakMinutes == 0 && breakSeconds == 0){ $('#clock>p').html("Session"); breakMinutes=$("#breakMinutes>#val").html(); breakRunning = 0; }
   if(breakRunning){
     breakBack();
     return;
@@ -66,34 +65,30 @@ $(document).ready(function(){ // all variable initializations
 function MinutesgthEventsHandler(){ // + and - event handler
   $('#decreBreakMinutes').click(function(){
     if(!running){
-      breakMinutes = $('#breakMinutes>#val').html();
       if(breakMinutes>1)
         $('#breakMinutes>#val').html( --breakMinutes );
+
     }
   });
   $('#increBreakMinutes').click(function(){
     if(!running){
-      breakMinutes = parseInt ( $('#breakMinutes>#val').html() );
       if(breakMinutes>1)
         $('#breakMinutes>#val').html( ++breakMinutes );
     }
   });
 
   $('#decreSessMinutes').click(function(){
-    if(!running){
-      sessMinutes = $('#sessMinutes>#val').html();
-      if(sessMinutes>1)
-        $('#sessMinutes>#val').html( --sessMinutes );
-      minutes = ($('#sessMinutes>#val').html());
+    if(!running && !breakRunning){
+      if(minutes>1)
+        $('#sessMinutes>#val').html( --minutes );
+      else minutes=1;
       seconds = 0;
       $('#time').html(minutes);
     }
   });
   $('#increSessMinutes').click(function(){
-    if(!running){
-      sessMinutes = parseInt ( $('#sessMinutes>#val').html() );
-      $('#sessMinutes>#val').html( ++sessMinutes );
-      minutes = ($('#sessMinutes>#val').html());
+    if(!running && !breakRunning){
+      $('#sessMinutes>#val').html( ++minutes );
       seconds = 0;
       $('#time').html(minutes);
     }
