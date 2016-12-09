@@ -1,6 +1,6 @@
 //---------------------initializations for time----------------------------
-var minutes = 1;
-var breakMinutes = 2;
+var minutes = 25;
+var breakMinutes = 5;
 //------------------------------------------------------------------------------------
 var seconds = 0;
 var breakSeconds = 0;
@@ -43,6 +43,7 @@ function start() {
       running = 1;
       if( ($('#sessMinutes>#val').html()) == ($('#time').html()) )
         totalTime = minutes*60 + seconds;
+      totalBreakTime = breakMinutes*60 + breakSeconds;
       clock = setInterval(back,1000);
     }
     else{ running = 0; clearInterval(clock); }
@@ -65,26 +66,39 @@ $(document).ready(function(){ // all variable initializations
 function MinutesgthEventsHandler(){ // + and - event handler
   $('#decreBreakMinutes').click(function(){
     if(!running){
-      if(breakMinutes>1)
-        $('#breakMinutes>#val').html( --breakMinutes );
-
+      if(breakMinutes>1) --breakMinutes;
+      else breakMinutes = 1;
+      $('#breakMinutes>#val').html( breakMinutes );
+      breakSeconds = 0;
+      $('#time').html(breakMinutes);
     }
   });
   $('#increBreakMinutes').click(function(){
     if(!running){
-      if(breakMinutes>1)
         $('#breakMinutes>#val').html( ++breakMinutes );
     }
+    breakSeconds = 0;
+    $('#time').html(breakMinutes);
   });
 
   $('#decreSessMinutes').click(function(){
-    if(!running && !breakRunning){
-      if(minutes>1)
-        $('#sessMinutes>#val').html( --minutes );
-      else minutes=1;
-      seconds = 0;
-      $('#time').html(minutes);
+    if(!running){
+      if(!breakRunning){
+        if(minutes>1)
+          $('#sessMinutes>#val').html( --minutes );
+        else minutes=1;
+        seconds = 0;
+        $('#time').html(minutes);
+      }
+      else{
+        if(breakMinutes>1)
+          $('#sessMinutes>#val').html( --breakMinutes );
+        else breakMinutes=1;
+        seconds = 0;
+        $('#time').html(breakMinutes);
+      }
     }
+
   });
   $('#increSessMinutes').click(function(){
     if(!running && !breakRunning){
