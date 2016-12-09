@@ -21,8 +21,8 @@ function breakBack(){
 }
 
 function back(){
-  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); minutes=$("#sessMinutes>#val").html(); breakRunning = 1; }
-  if(breakMinutes == 0 && breakSeconds == 0){ $('#clock>p').html("Session"); breakMinutes=$("#breakMinutes>#val").html(); breakRunning = 0; }
+  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); minutes=$("#sessMinutes>#val").html(); $("#fill").css('background-color','#c54e4e'); breakRunning = 1; }
+  if(breakMinutes == 0 && breakSeconds == 0){ $('#clock>p').html("Session"); breakMinutes=$("#breakMinutes>#val").html(); $("#fill").css('background-color','#88cc88'); breakRunning = 0; }
   if(breakRunning){
     breakBack();
     return;
@@ -70,15 +70,17 @@ function MinutesgthEventsHandler(){ // + and - event handler
       else breakMinutes = 1;
       $('#breakMinutes>#val').html( breakMinutes );
       breakSeconds = 0;
-      $('#time').html(breakMinutes);
+      if(breakRunning)
+        $('#time').html(breakMinutes);
     }
   });
   $('#increBreakMinutes').click(function(){
     if(!running){
         $('#breakMinutes>#val').html( ++breakMinutes );
+        breakSeconds = 0;
+        if(breakRunning)
+        $('#time').html(breakMinutes);
     }
-    breakSeconds = 0;
-    $('#time').html(breakMinutes);
   });
 
   $('#decreSessMinutes').click(function(){
