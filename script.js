@@ -1,6 +1,6 @@
 //---------------------initializations for time----------------------------
-var minutes = 25;
-var breakMinutes = 5;
+var minutes = 1;
+var breakMinutes = 2;
 //------------------------------------------------------------------------------------
 var seconds = 0;
 var breakSeconds = 0;
@@ -9,13 +9,27 @@ var debug = 0;
 var clock;
 var running = 0;
 var breakRunning = 0;
-var totalTime; // initialized when clock is clicked
+var totalTime = minutes*60 + seconds;
+var totalBreakTime = breakMinutes*60 + breakSeconds;
 var totalTimeRemaining;
 var totalTimeRemainingPercent = 0;
+function breakBack(){
+  if(breakSeconds == 0){ breakSeconds = 59; breakMinutes--; } else breakSeconds--;
+  $('#time').html( breakMinutes+":"+breakSeconds );
+  totalTimeRemaining = breakMinutes*60 + breakSeconds;
+  totalTimeRemainingPercent = (totalTimeRemaining/totalBreakTime)*100;
+  $('#fill').css("bottom", - totalTimeRemainingPercent+"%");
+}
+
 function back(){
-  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); breakRunning = 1; return; }
+  if(minutes == 0 && seconds == 0){ $('#clock>p').html("Break!"); breakRunning = 1; }
+  if(breakMinutes == 0 && breakSeconds == 0){ $('#clock>p').html("Session"); breakRunning = 0; }
+  if(breakRunning){
+    breakBack();
+    return;
+  }
   if(seconds == 0){ seconds = 59; minutes--; } else seconds--;
-  $('#debug').html( minutes+":"+seconds );
+  // $('#debug').html( minutes+":"+seconds );
   $('#time').html( minutes+":"+seconds );
   totalTimeRemaining = minutes*60 + seconds;
   totalTimeRemainingPercent = (totalTimeRemaining/totalTime)*100;
@@ -23,6 +37,7 @@ function back(){
 }
 
 function start() {
+
     MinutesgthEventsHandler();
   $('#clock').click(function(){
     if (!running){
@@ -37,8 +52,8 @@ function start() {
 
 $(document).ready(function(){ // all variable initializations
   $('#time').html(minutes);
-
-  breakMinutes = ($('#sessMinutes>#val').html());
+  $('#sessMinutes>#val').html(minutes);
+  $('#breakMinutes>#val').html(breakMinutes);
   $('#time').html(minutes);
 
   if(debug){
