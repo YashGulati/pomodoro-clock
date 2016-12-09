@@ -2,6 +2,11 @@
 var minutes = 25;
 var breakMinutes = 5;
 //------------------------------------------------------------------------------------
+/* sdfdsf
+cfvdfds
+sdfds
+fdsfds
+fsdfsdf */
 var seconds = 0;
 var breakSeconds = 0;
 var debug = 0;
