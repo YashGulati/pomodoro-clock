@@ -102,7 +102,6 @@ function MinutesgthEventsHandler(){ // + and - event handler
           $('#sessMinutes>#val').html( --breakMinutes );
         else breakMinutes=1;
         seconds = 0;
-        $('#time').html(breakMinutes);
       }
     }
 
@@ -113,5 +112,7 @@ function MinutesgthEventsHandler(){ // + and - event handler
       seconds = 0;
       $('#time').html(minutes);
     }
+    if(breakRunning)
+      $('#sessMinutes>#val').html( ++minutes );
   });
 }
