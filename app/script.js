@@ -43,6 +43,7 @@ function start() {
       running = 1;
       if( ($('#sessMinutes>#val').html()) == ($('#time').html()) )
         totalTime = minutes*60 + seconds;
+      if( ($('#breakMinutes>#val').html()) == ($('#time').html()) )
       totalBreakTime = breakMinutes*60 + breakSeconds;
       clock = setInterval(back,1000);
     }
