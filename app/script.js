@@ -1,10 +1,14 @@
 //---------------------initializations for time----------------------------
 var minutes = 25;
 var breakMinutes = 5;
-//-------------------------------------------------------------------------
 var seconds = 0;
 var breakSeconds = 0;
-var debug = 0;
+//-------------------------------------------------------------------------
+//---------------------DOM elements----------------------------------------
+var clock_ = $('#clock') ;
+var time_ = $('#time') ;
+var fill_ = $('#fill') ;
+//-------------------------------------------------------------------------
 var clock;
 var running = 0;
 var breakRunning = 0;
@@ -12,12 +16,13 @@ var totalTime = minutes*60 + seconds;
 var totalBreakTime = breakMinutes*60 + breakSeconds;
 var totalTimeRemaining;
 var totalTimeRemainingPercent = 0;
+
 function breakBack(){
   if(breakSeconds == 0){ breakSeconds = 59; breakMinutes--; } else breakSeconds--;
-  $('#time').html( breakMinutes+":"+breakSeconds );
+  time_.html( breakMinutes+":"+breakSeconds );
   totalTimeRemaining = breakMinutes*60 + breakSeconds;
   totalTimeRemainingPercent = (totalTimeRemaining/totalBreakTime)*100;
-  $('#fill').css("bottom", - totalTimeRemainingPercent+"%");
+  fill_.css("bottom", - totalTimeRemainingPercent+"%");
 }
 
 function back(){
@@ -28,22 +33,20 @@ function back(){
     return;
   }
   if(seconds == 0){ seconds = 59; minutes--; } else seconds--;
-  // $('#debug').html( minutes+":"+seconds );
-  $('#time').html( minutes+":"+seconds );
+  time_.html( minutes+":"+seconds );
   totalTimeRemaining = minutes*60 + seconds;
   totalTimeRemainingPercent = (totalTimeRemaining/totalTime)*100;
   $('#fill').css("bottom", - totalTimeRemainingPercent+"%");
 }
 
 function start() {
-
     MinutesgthEventsHandler();
-  $('#clock').click(function(){
+  clock_.click(function(){
     if (!running){
       running = 1;
-      if( ($('#sessMinutes>#val').html()) == ($('#time').html()) )
+      if( ($('#sessMinutes>#val').html()) == (time_.html()) )
         totalTime = minutes*60 + seconds;
-      if( ($('#breakMinutes>#val').html()) == ($('#time').html()) )
+      if( ($('#breakMinutes>#val').html()) == (time_.html()) )
       totalBreakTime = breakMinutes*60 + breakSeconds;
       clock = setInterval(back,1000);
     }
@@ -52,36 +55,26 @@ function start() {
 }
 
 $(document).ready(function(){ // all variable initializations
-  $('#time').html(minutes);
+  time_.html(minutes);
   $('#sessMinutes>#val').html(minutes);
   $('#breakMinutes>#val').html(breakMinutes);
-  $('#time').html(minutes);
-
-  if(debug){
-    $('#debug').css("display","block");
-    $('#debug').html( minutes+":"+seconds );
-  }
+  time_.html(minutes);
   start();
 });
 
 function MinutesgthEventsHandler(){ // + and - event handler
-  $('#decreBreakMinutes').click(function(){
-    if(!running){
+  $('#decreBreakMinutes').click(function(){ if(running) return;
       if(breakMinutes>1) --breakMinutes;
-      else breakMinutes = 1;
       $('#breakMinutes>#val').html( breakMinutes );
       breakSeconds = 0;
       if(breakRunning)
-        $('#time').html(breakMinutes);
-    }
+        time_.html(breakMinutes);
   });
-  $('#increBreakMinutes').click(function(){
-    if(!running){
+  $('#increBreakMinutes').click(function(){ if(running) return;
         $('#breakMinutes>#val').html( ++breakMinutes );
         breakSeconds = 0;
         if(breakRunning)
-        $('#time').html(breakMinutes);
-    }
+        time_.html(breakMinutes);
   });
 
   $('#decreSessMinutes').click(function(){
@@ -91,7 +84,7 @@ function MinutesgthEventsHandler(){ // + and - event handler
           $('#sessMinutes>#val').html( --minutes );
         else minutes=1;
         seconds = 0;
-        $('#time').html(minutes);
+        time_.html(minutes);
       }
       else{
         if(breakMinutes>1)
@@ -106,7 +99,7 @@ function MinutesgthEventsHandler(){ // + and - event handler
     if(!running && !breakRunning){
       $('#sessMinutes>#val').html( ++minutes );
       seconds = 0;
-      $('#time').html(minutes);
+      time_.html(minutes);
     }
     if(breakRunning)
       $('#sessMinutes>#val').html( ++minutes );
