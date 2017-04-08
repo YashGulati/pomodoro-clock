@@ -7,7 +7,7 @@ gulp.task('default', function() {
   browserSync({
     server: {
       baseDir: 'app/'
-    }
+    }, ui: false, notify: false
   });
 
   gulp.watch(['**/*.js','**/*.css','**/*.css'], {cwd: 'app/'}, reload);
